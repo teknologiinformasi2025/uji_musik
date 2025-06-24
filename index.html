@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Musik Otomatis</title>
+</head>
+<body>
+  <h1>Selamat Datang!</h1>
+
+  <!-- Audio autoplay -->
+  <audio id="bg-music" autoplay loop>
+    <source src="bg-music.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung pemutar audio.
+  </audio>
+
+  <button onclick="toggleMusic()">🔊 Play / Pause</button>
+
+  <script>
+    const audio = document.getElementById('bg-music');
+
+    // Coba autoplay secara paksa setelah halaman dimuat
+    window.addEventListener('load', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log("Audio diputar otomatis.");
+          })
+          .catch(error => {
+            console.warn("Autoplay dicegah oleh browser. User harus klik tombol.");
+          });
+      }
+    });
+
+    // Tombol manual play/pause
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+</body>
+</html>
